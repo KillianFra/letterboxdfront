@@ -11,6 +11,17 @@ export default {
       colors: {
         background: "#14181C",
         foreground: "var(--foreground)",
+        default: '#d8e0e8',
+        lbgreen: '#00ac1c',
+        lbgreenhover: '#009D1A',
+      },
+      boxShadow: {
+        bottom: "inset 0px -30px 120px 100px rgba(20, 24, 28, 1)",
+      },
+      fontFamily: {
+        graphik: ["Graphik", "sans-serif"],
+        tiempos: ["Tiempos", "serif"],
+        tiemposTitle: ["Tiempos Headline", "serif"],
       },
     },
   },
