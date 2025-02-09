@@ -20,6 +20,7 @@ export default {
       },
       fontFamily: {
         graphik: ["Graphik", "sans-serif"],
+        graphikRegular: ["Graphik Regular", "sans-serif"],
         tiempos: ["Tiempos", "serif"],
         tiemposTitle: ["Tiempos Headline", "serif"],
       },
