@@ -1,9 +1,9 @@
-export function formatNumber(num: string): string {
+export function formatNumber(num: string | number): string | number {
     let parsedNum: number;
     try {
         // Parse the number to a float and round it to the nearest integer.
 
-        parsedNum = Math.round(parseFloat(num));
+        parsedNum = Math.round(parseFloat(num as string));
     }
     catch (e) {
         console.error(e);

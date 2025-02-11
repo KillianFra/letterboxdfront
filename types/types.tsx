@@ -16,5 +16,23 @@ type Movie = {
     video: boolean;
   };
 
+
+type Review = {
+  body: string
+  createdAt: Date
+  id: number
+  movieId: number
+  rating: number
+  userId: number
+  verified: boolean
+};
+
+type ReviewMovie = {
+  movies: Movie
+  reviews: Review
+}
+
+type CardVariant = "movie" | "review";
+
   
-export type { Movie };
+export type { Movie, ReviewMovie, Review, CardVariant };

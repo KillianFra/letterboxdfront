@@ -1,18 +1,20 @@
-import MovieCard from "@/components/moviecard";
+import MovieCard from "@/components/genericCard";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaAndroid, FaApple, FaCalendar, FaEye, FaHeart, FaStar } from "react-icons/fa";
-import { Movie } from "../../types/types";
+import { Movie, ReviewMovie } from "../../types/types";
 import { ImParagraphLeft } from "react-icons/im";
 import { LuBlocks } from "react-icons/lu";
 import InfoCard from "@/components/infocard";
+import GenericCard from "@/components/genericCard";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Home() {
 
   const router = useRouter();
   const [popularMovies, setPopularMovies] = useState<Movie[]>();
-  const [recentReviews, setRecentReviews] = useState<Movie[]>();
+  const [recentReviews, setRecentReviews] = useState<ReviewMovie[]>();
   
   
   function handleRedirect() {
@@ -31,11 +33,14 @@ export default function Home() {
   useEffect(() => {
     fetch('/api/movies/popular?limit=6&offset=10').then((res) => res.json()).then((data) => {
       setPopularMovies(data.movies as Movie[])
-      console.log(data)
     });
     fetch('/api/movies/reviews/latest').then((res) => res.json()).then((data) => {
-      setRecentReviews(data.movies as Movie[])
-      console.log(data)
+      setRecentReviews(data.reviews as ReviewMovie[])
+
+      if (data.reviews.length < 12) {
+        const nulls = new Array(12 - data.reviews.length).fill(null);
+        setRecentReviews((prev) => [...prev!, ...nulls]);
+      }
     });
   }, []);
 
@@ -68,7 +73,7 @@ export default function Home() {
       <div className="recentMovieContainer flex items-center justify-center pt-16 gap-2">
         {popularMovies && popularMovies.map((movie) => {
           return (
-            <MovieCard movie={movie} key={movie.id} />
+            <GenericCard data={movie} variant="movie" key={movie.id} />
           )
         }
         )}
@@ -86,8 +91,17 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col gap-2 pt-16">
-          <h1 className="uppercase font-graphikRegular">Just Reviewed...</h1>
-          <div className="flex gap-1.5 flex-wrap">
+          <h1 className="uppercase font-graphikRegular border-b pb-1">Just Reviewed...</h1>
+          <div className="flex justify-between flex-wrap">
+            {recentReviews && recentReviews?.map((review, index) => {
+              if (!review) {
+                return <Skeleton className="h-[105px] w-[70px] bg-white/10" key={index} />
+              }
+              return (
+                <GenericCard data={review} variant="review" height="105px" width="70px" isHoverable={false} key={index} />
+              )
+            }
+            )}
           </div>
         </div>
       </div>
