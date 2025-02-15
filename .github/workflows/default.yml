@@ -1,18 +1,31 @@
-// make me a github action that runs the tests on every push to master
-name: Run tests on push to master
+name: Build and Deploy
+
 on:
   push:
     branches:
-      - master
+      - main
+
 jobs:
-  test:
+  build:
+    environment: production
     runs-on: ubuntu-latest
-    container:
-      image: node:20
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: 20
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run build
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        env:
+          API_URL: ${{ secrets.API_URL }}
+        run: npm run build
+
+      - name: Deploy
+        run: npm run deploy
