@@ -1,4 +1,3 @@
-import MovieCard from "@/components/genericCard";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -23,7 +22,7 @@ export default function Home() {
 
   const infoCards: { icon: React.ReactElement, text: string, className: string}[] = [
     { icon: <FaEye size={40} />, text: 'Keep track of every film you’ve ever watched (or just start from the day you join)', className: 'hover:bg-lbgreen' },
-    { icon: <FaHeart size={40} />, text: 'Show some love for your favorite films, lists and reviews with a “like"', className: 'hover:bg-orange-800' },
+    { icon: <FaHeart size={40} />, text: 'Show some love for your favorite films, lists and reviews with a like"', className: 'hover:bg-orange-800' },
     { icon: <ImParagraphLeft size={40} />, text: 'Write and share reviews, and follow friends and other members to read theirs', className: 'hover:bg-blue-800' },
     { icon: <FaStar size={40} />, text: 'Rate each film on a five-star scale (with halves) to record and share your reaction', className: 'hover:bg-lbgreen' },
     { icon: <FaCalendar size={40} />, text: 'Keep a diary of your film watching (and upgrade to PRO for comprehensive stats)', className: 'hover:bg-emerald-600' },
@@ -48,7 +47,7 @@ export default function Home() {
     <div className="bg-background min-h-screen flex flex-col items-center">
       <div className="relative flex flex-col items-center justify-center h-full">
         <div className="flex w-full lg:w-4/5 shadow-background justify-center shadow-inner bg-cover">
-          <Image src={'https://image.tmdb.org/t/p/original' + '/9LSsSPbP715XT9B7acIZzantPyX.jpg'}
+          <Image src={'https://image.tmdb.org/t/p/original' + '/1IWaKG7AWiYMhADxhGtnElDJAGI.jpg'}
             alt="movie"
             className="max-h-[700px] max-w-[1200px]"
             width={1920}
@@ -82,9 +81,9 @@ export default function Home() {
         <div className="flex flex-col gap-2">
           <h1 className="uppercase font-graphikRegular">Letterboxd lets you...</h1>
           <div className="flex gap-1.5 flex-wrap">
-            {infoCards.map((info) => {
+            {infoCards.map((info, index) => {
               return (
-                <InfoCard icon={info.icon} text={info.text} className={info.className} />
+                <InfoCard key={index} icon={info.icon} text={info.text} className={info.className} />
               )
             })}
           </div>
