@@ -13,7 +13,8 @@ export default {
   			'0.1': '0.1px'
   		},
   		fontSize: {
-  			xsm: '0.830rem'
+  			xsm: '0.830rem',
+			xxs: '0.625rem'
   		},
   		colors: {
   			background: 'hsl(var(--background))',
