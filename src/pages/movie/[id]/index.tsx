@@ -15,15 +15,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Calendar } from "@/components/ui/calendar"
 import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
+import Link from "next/link";
 
 export default function Page() {
   const user = useUser();
@@ -100,25 +94,25 @@ export default function Page() {
                   <>
                     <div className="flex bg-gray-600 font-sm text-xs font-normal rounded-t-sm p-2 justify-around px-5">
                       <div className="flex flex-col items-center gap-0.5">
-                        <a href="/">
+                        <Link href="/">
                           <Eye className="text-gray-300" strokeWidth={0.75} size={40} />
-                        </a>
+                        </Link>
                         <p className="select-none text-gray-200 font-sans">
                           Watch
                         </p>
                       </div>
                       <div className="flex flex-col items-center gap-0.5">
-                        <a href="/">
+                        <Link href="/">
                           <Heart className="text-gray-300" strokeWidth={0.75} size={40} />
-                        </a>
+                        </Link>
                         <p className="select-none text-gray-200 font-sans">
                           Like
                         </p>
                       </div>
                       <div className="flex flex-col items-center gap-0.5">
-                        <a href="/">
+                        <Link href="/">
                           <ClockArrowUp className="text-gray-300" strokeWidth={0.75} size={40} />
-                        </a>
+                        </Link>
                         <p className="select-none text-gray-200 font-sans">
                           WatchList
                         </p>
@@ -205,12 +199,12 @@ export default function Page() {
                   </>
                 ) : (
                     <>
-                      <a href="/" className="bg-gray-600 rounded-t-md text-center py-3">
+                      <Link href="/" className="bg-gray-600 rounded-t-md text-center py-3">
                         <p className="text-gray-300 text-sm font-sans tracking-tight">Sign in to log, rate or review</p>
-                      </a>
-                      <a href="/" className="bg-gray-600 text-center py-3">
+                      </Link>
+                      <Link href="/" className="bg-gray-600 text-center py-3">
                         <p className="text-gray-300 text-sm font-sans tracking-tight">Share</p>
-                      </a>
+                      </Link>
                     </>
                   )}
               </div>

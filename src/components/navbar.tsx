@@ -24,9 +24,9 @@ export default function Navbar() {
     
     return (
         <div className="bg-transparent w-full absolute flex pt-2 items-center justify-center z-50">
-            <a href="/" className="lg:block hidden">
+            <Link href="/" className="lg:block hidden">
                 <Image src="/logo.svg" alt="logo" width={250} height={250} />
-            </a>
+            </Link>
             <div className="ml-10 mr-5 font-graphik flex items-center text-xsm tracking-widest text-default font-medium">
                 {authType ? (
                     <AuthModal type={authType} onClose={() => setAuthType(null)} />

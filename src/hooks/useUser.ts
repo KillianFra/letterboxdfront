@@ -1,6 +1,5 @@
 // filepath: /c:/Users/frava/OneDrive/Documents/Ynov/Api/letterboxdfront/src/hooks/useUser.ts
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 
 interface User {
@@ -13,7 +12,6 @@ interface User {
 export function useUser() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     const token = Cookies.get('token');
@@ -32,14 +30,15 @@ export function useUser() {
         });
 
         if (!response.ok) {
-          throw new Error('Failed to fetch user');
+          Cookies.remove('token');
+          return;        
         }
 
         const data = await response.json();
         setUser(data.user);
       } catch (error) {
         console.error('Error fetching user:', error);
-        // Cookies.remove('token');
+        Cookies.remove('token');
       } finally {
         setLoading(false);
       }
