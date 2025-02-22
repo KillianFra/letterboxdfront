@@ -8,11 +8,11 @@ interface InfoCardProps {
 
 export default function InfoCard({ icon, text, className }: InfoCardProps) {
     return (
-        <div className={'flex bg-[#456] w-[310px] min-h-42 p-6 rounded-sm ' + className}>
+        <div className={'flex bg-[#456] w-[calc(50%-5px)] p-6 lg:w-[calc(30%-10px)] rounded-sm box-border ' + className}>
             <div style={{ marginRight: '10px'}}>
                 {icon}
             </div>
-            <div className='text-wrap font-graphikRegular text-[#def]'>
+            <div className='text-wrap font-graphikRegular text-xs text-[#def]'>
                 {text}
             </div>
         </div>

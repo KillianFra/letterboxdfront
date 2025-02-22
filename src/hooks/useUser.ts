@@ -39,15 +39,14 @@ export function useUser() {
         setUser(data.user);
       } catch (error) {
         console.error('Error fetching user:', error);
-        Cookies.remove('token');
-        router.push('/login');
+        // Cookies.remove('token');
       } finally {
         setLoading(false);
       }
     }
 
     fetchUser();
-  }, [router]);
+  }, []);
 
   return { user, loading };
 }

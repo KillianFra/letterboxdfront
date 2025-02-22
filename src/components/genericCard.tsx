@@ -46,14 +46,14 @@ export default function GenericCard({
         <div
             onClick={handleRedirect}
             style={{ width: cardWidth, height: cardHeight }}
-            className="relative flex flex-col items-center justify-center rounded-lg overflow-hidden cursor-pointer border-0.1 border-white/10"
+            className="relative min-w-24 min-h-36 flex flex-col items-center justify-center rounded-lg overflow-hidden cursor-pointer border-0.1 border-white/10"
         >
-            <Image
-                className="rounded-lg"
-                src={`https://image.tmdb.org/t/p/original/${posterPath}`}
-                layout='fill'
-                alt={title}
-            />
+                <Image
+                    className="rounded-lg"
+                    src={`https://image.tmdb.org/t/p/original/${posterPath}`}
+                    layout='fill'
+                    alt={title}
+                />
             <div className="overlay flex justify-center items-center absolute top-0 left-0 w-full h-full border-lbgreen border-2 hover:opacity-100 opacity-0 duration-200 rounded-lg">
                 {
                     isHoverable && (

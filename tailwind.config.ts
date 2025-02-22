@@ -62,7 +62,9 @@ export default {
   			}
   		},
   		boxShadow: {
-  			bottom: 'inset 0px -30px 120px 100px rgba(20, 24, 28, 1)'
+  			bottom: 'inset 0px -30px 120px 100px rgba(20, 24, 28, 1)',
+			bottomMovie: 'inset 0px -100px 120px 100px rgba(20, 24, 28, 1)',
+			right: 'inset -20px 0px 30px 0px rgba(20, 24, 28, 1)'
   		},
   		fontFamily: {
   			graphik: [

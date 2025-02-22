@@ -14,13 +14,13 @@ export default function Home() {
   const router = useRouter();
   const [popularMovies, setPopularMovies] = useState<Movie[]>();
   const [recentReviews, setRecentReviews] = useState<ReviewMovie[]>();
-  
-  
+
+
   function handleRedirect() {
     router.push('/signup');
   }
 
-  const infoCards: { icon: React.ReactElement, text: string, className: string}[] = [
+  const infoCards: { icon: React.ReactElement, text: string, className: string }[] = [
     { icon: <FaEye size={40} />, text: 'Keep track of every film you’ve ever watched (or just start from the day you join)', className: 'hover:bg-lbgreen' },
     { icon: <FaHeart size={40} />, text: 'Show some love for your favorite films, lists and reviews with a like"', className: 'hover:bg-orange-800' },
     { icon: <ImParagraphLeft size={40} />, text: 'Write and share reviews, and follow friends and other members to read theirs', className: 'hover:bg-blue-800' },
@@ -36,8 +36,8 @@ export default function Home() {
     fetch('/api/movies/reviews/latest').then((res) => res.json()).then((data) => {
       setRecentReviews(data.reviews as ReviewMovie[])
 
-      if (data.reviews.length < 12) {
-        const nulls = new Array(12 - data.reviews.length).fill(null);
+      if (data.reviews.length < 16) {
+        const nulls = new Array(16 - data.reviews.length).fill(null);
         setRecentReviews((prev) => [...prev!, ...nulls]);
       }
     });
@@ -53,8 +53,7 @@ export default function Home() {
             width={1920}
             height={1080} />
         </div >
-        <div></div>
-        <div className="absolute min-h-[700px] lg:min-w-[1200px] shadow-bottom"></div>
+        <div className="absolute min-h-[700px] w-full lg:min-w-[1200px] shadow-bottom"></div>
         <div className="absolute flex flex-col bottom-0 font-tiemposTitle tracking-tight text-4xl text-center gap-2">
           <h1>Track films you’ve watched.</h1>
           <h1>Save those you want to see.</h1>
@@ -62,14 +61,14 @@ export default function Home() {
           <div>
             <button onClick={handleRedirect} className="mt-6 bg-lbgreen hover:bg-lbgreenhover text-base text-center items-center font-graphik tracking-widest px-6 py-2 rounded-sm">Get started - it's free!</button>
           </div>
-        <div className="text-lg flex items-center justify-center font-sans font-semibold tracking-wide text-gray-500 mt-5 gap-1">
-          <p>The social network for film lovers. Also available on</p>
-          <FaApple size={30} className="hover:text-white duration-300"/>
-          <FaAndroid size={30} className="hover:text-white duration-300"/>
-        </div>
+          <div className="text-lg flex items-center justify-center font-sans font-semibold tracking-wide text-gray-500 mt-5 gap-1">
+            <p>The social network for film lovers. Also available on</p>
+            <FaApple size={30} className="hover:text-white duration-300" />
+            <FaAndroid size={30} className="hover:text-white duration-300" />
+          </div>
         </div>
       </div>
-      <div className="recentMovieContainer flex items-center justify-center pt-16 gap-2">
+      <div className="recentMovieContainer flex flex-start lg:items-center justify-center pt-16 gap-2 w-full overflow-scroll">
         {popularMovies && popularMovies.map((movie) => {
           return (
             <GenericCard data={movie} variant="movie" key={movie.id} />
@@ -77,33 +76,33 @@ export default function Home() {
         }
         )}
       </div>
-      <div className="informationsContainer px-[10.5rem] text-gray-400 w-2/3 text-sm font-graphik pt-16">
+      <div className="informationsContainer w-4/5 lg:px-[10.5rem] lg:w-2/3 text-gray-400 text-sm font-graphik pt-16">
         <div className="flex flex-col gap-2">
-          <h1 className="uppercase font-graphikRegular">Letterboxd lets you...</h1>
-          <div className="flex gap-1.5 flex-wrap">
+          <h1 className="uppercase font-graphikRegular lg:pl-14">Letterboxd lets you...</h1>
+          <div className="flex flex-wrap lg:justify-center gap-1.5">
             {infoCards.map((info, index) => {
               return (
                 <InfoCard key={index} icon={info.icon} text={info.text} className={info.className} />
-              )
+              );
             })}
           </div>
         </div>
+      </div>
 
-        <div className="flex flex-col gap-2 pt-16">
-          <h1 className="uppercase font-graphikRegular border-b pb-1">Just Reviewed...</h1>
-          <div className="flex justify-between flex-wrap">
-            {recentReviews && recentReviews?.map((review, index) => {
-              if (!review) {
-                return <Skeleton className="h-[105px] w-[70px] bg-white/10" key={index} />
-              }
-              return (
-                <GenericCard data={review} variant="review" height="105px" width="70px" isHoverable={false} key={index} />
-              )
+      <div className="flex flex-col w-4/5 lg:w-2/4 pt-16">
+        <h1 className="uppercase font-graphikRegular border-b pb-1">Just Reviewed...</h1>
+        <div className="flex flex-start gap-5 overflow-x-auto h-32 pt-2 shadow-right shadow-black">
+          {recentReviews && recentReviews?.map((review, index) => {
+            if (!review) {
+              return <Skeleton className="h-[105px] min-h-[105px] w-[70px] min-w-[70px] bg-white/10" key={index} />
             }
-            )}
-          </div>
+            return (
+              <GenericCard data={review} variant="review" height="105px" width="70px" isHoverable={false} key={index} />
+            )
+          })}
         </div>
       </div>
+
     </div>
   )
 }
